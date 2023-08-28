@@ -3,7 +3,7 @@ package com.logicea.cardify.modelpojos;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * @author TOKOTH
+ * @author EONYANDO
  *
  */
 public class BodyErrorMessage {

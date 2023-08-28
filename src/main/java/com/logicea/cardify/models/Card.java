@@ -1,5 +1,7 @@
 package com.logicea.cardify.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -34,14 +36,14 @@ public class Card {
 
     private String color;
 
-    @Enumerated(EnumType.STRING)
-    private EStatus status = EStatus.ToDo;
+
+    private String status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Card(Long id, String name, String description, String color, EStatus status, User user) {
+    public Card(Long id, String name, String description, String color, String status, User user) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -83,18 +85,18 @@ public class Card {
         this.color = color;
     }
 
-    public EStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(EStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
-
+    @JsonIgnore
     public User getUser() {
         return user;
     }
-
+    @JsonProperty
     public void setUser(User user) {
         this.user = user;
     }

@@ -11,6 +11,7 @@ import com.logicea.cardify.repository.RoleRepository;
 import com.logicea.cardify.repository.UserRepository;
 import com.logicea.cardify.security.jwt.JwtUtils;
 import com.logicea.cardify.security.services.UserDetailsImpl;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +47,7 @@ public class AuthController {
   JwtUtils jwtUtils;
 
   @PostMapping("/signin")
+  @Operation(summary="Api to authenticate users")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
     Authentication authentication = authenticationManager.authenticate(
@@ -67,6 +69,7 @@ public class AuthController {
   }
 
   @PostMapping("/signup")
+  @Operation(summary="Api to signup users")
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
       return ResponseEntity

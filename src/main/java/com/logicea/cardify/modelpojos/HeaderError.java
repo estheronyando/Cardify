@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 
 /**
- * @author TOKOTH
+ * @author EONYANDO
  *
  */
 public class HeaderError implements Serializable {

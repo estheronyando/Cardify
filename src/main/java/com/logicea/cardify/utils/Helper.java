@@ -27,7 +27,7 @@ public class Helper {
     }
 
     public static boolean isColorFormatValid(String color) {
-        if (color == null) {
+        if (color == null || color.isEmpty()) {
             return true; // Allow null color
         }
         // Validate color format

@@ -6,7 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * @author TOKOTH
+ * @author EONYANDO
  *
  */
 public class HeaderErrorMessage{
