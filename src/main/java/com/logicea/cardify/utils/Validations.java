@@ -21,7 +21,6 @@ public class Validations {
         // Global Headers
         headerErrorMessage = new HeaderErrorMessage();
         if(name == null ||!Helper.isColorFormatValid(color) || name.isEmpty()) {
-            //LogsManager.warn(requestRefId, transactionType, "", "", "", "","", "Request values cannot be empty", String.valueOf(HttpStatus.BAD_REQUEST), GlobalVariables.RESPONSE_REQUEST_VALUES_EMPTY, "Invalid Request Payload", "", "");
             if(!Helper.isColorFormatValid(color)){
                 return new ResponseEntity<>(EntryResponse
                         .responseFormatter(GlobalVariables.RESPONSE_CODE_400, requestRefId, GlobalVariables.INVALID_COLOR_FORMAT,
@@ -51,7 +50,6 @@ public class Validations {
                     HttpStatus.BAD_REQUEST);
         }
         if(name == null ||!Helper.isColorFormatValid(color) || name.isEmpty()) {
-            //LogsManager.warn(requestRefId, transactionType, "", "", "", "","", "Request values cannot be empty", String.valueOf(HttpStatus.BAD_REQUEST), GlobalVariables.RESPONSE_REQUEST_VALUES_EMPTY, "Invalid Request Payload", "", "");
             if(!Helper.isColorFormatValid(color)){
                 return new ResponseEntity<>(EntryResponse
                         .responseFormatter(GlobalVariables.RESPONSE_CODE_400, requestRefId, GlobalVariables.INVALID_COLOR_FORMAT,

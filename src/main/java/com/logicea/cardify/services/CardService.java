@@ -51,8 +51,11 @@ public class CardService {
         User user = userRepository.findUserByUsername(username);
         isColorFormatValid=Helper.isColorFormatValid(cardPojo.getColor());
         if (user.getRoles().stream().anyMatch(role -> role.getName().toString().equals("ROLE_ADMIN"))) {
-            if(user_name != null){
+            if(user_name != null && !user_name.isEmpty() ){
                 user=userRepository.findUserByUsername(user_name);
+                if(user==null){
+                    return null;
+                }
             }
         }
         if (!isColorFormatValid) {
@@ -89,8 +92,11 @@ public class CardService {
         User user;
         user = getCurrentLoggedInUser();
         if (user.getRoles().stream().anyMatch(role -> role.getName().toString().equals("ROLE_ADMIN"))){
-            if(user_name != null){
+            if(user_name != null && !user_name.isEmpty()){
                 user=userRepository.findUserByUsername(user_name);
+                if(user==null){
+                    return null;
+                }
             }
             return cardRepository.findCardByNameWithAccessCheck(cardName,user.getId());
         }
@@ -105,8 +111,13 @@ public class CardService {
             String username=loggedInuser.getUsername();
             User user=userRepository.findUserByUsername(username);
             if(user.getRoles().stream().anyMatch(role -> role.getName().toString().equals("ROLE_ADMIN"))){
-                if(user_name!=null){
+                if(user_name!=null && !user_name.isEmpty()){
                     user=userRepository.findUserByUsername(user_name);
+                    if (user==null){
+                        return new ResponseEntity<>(EntryResponse
+                                .responseFormatter(GlobalVariables.RESPONSE_CODE_404, requestRefId, "Username not found",
+                                        "Username not found. Please submit a valid username", ""), HttpStatus.OK);
+                    }
                 }
             }
 
@@ -135,7 +146,7 @@ public class CardService {
         try {
             User user=getCurrentLoggedInUser();
             if(user.getRoles().stream().anyMatch(role -> role.getName().toString().equals("ROLE_ADMIN"))){
-                if(username != null){
+                if(username != null && !username.isEmpty()){
                     user=userRepository.findUserByUsername(username);
                 }
             }
