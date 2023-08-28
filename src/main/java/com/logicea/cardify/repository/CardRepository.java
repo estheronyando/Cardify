@@ -24,7 +24,9 @@ public interface CardRepository extends JpaRepository<Card,Long> {
     List<Card> findAllByUserUsernameAndCreationDateAfter(String username, Date date);
 
     @Query(value= "SELECT * FROM cards where name = ?1",nativeQuery = true)
-    List<Card> findCardByname(String name);
+    List<Card> findAllCardsByname(String name);
+    @Query(value= "SELECT c FROM Card c WHERE c.name = :cardName AND c.user.id = :userId")
+    List<Card> findAllCardsBynameforuser(@Param("cardName") String cardName, @Param("userId") Long userId);
 
     @Query("SELECT c FROM Card c WHERE " +
             "(:name IS NULL OR c.name LIKE %:name%) " +

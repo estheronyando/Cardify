@@ -75,8 +75,11 @@ public class CardService {
 
     public List<Card> getCardByName(String cardName){
         User user=getCurrentLoggedInUser();
-        List<Card> rcaData = cardRepository.findCardByname(cardName);
-        return rcaData;
+        if (user.getRoles().stream().anyMatch(role -> role.getName().toString().equals("ROLE_ADMIN"))){
+            List<Card> rcaData = cardRepository.findAllCardsByname(cardName);
+            return rcaData;
+        }
+       return cardRepository.findAllCardsBynameforuser(cardName,user.getId());
     }
 
     public List<Card> searchCards(String name, String color, EStatus status, Date creationDate,int page, int size,String sortBy) {

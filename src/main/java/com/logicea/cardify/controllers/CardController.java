@@ -71,7 +71,6 @@ public class CardController {
 
     try{
       Card findCardWithName = cardService.getCardByNameWithAccessCheck(cardPojo.getName(),username);
-      System.out.println(findCardWithName);
       if(findCardWithName==null){
         Card createdCard = cardService.createCard(cardPojo, username);
         return new ResponseEntity<>(EntryResponse.responseFormatter(GlobalVariables.RESPONSE_CODE_200, transactionRequestRefId,
@@ -84,7 +83,7 @@ public class CardController {
                 HttpStatus.CONFLICT);
       }
     }catch(Exception ex){
-      System.out.println(ex.toString());
+
       return new ResponseEntity<>(EntryResponse.responseFormatter(GlobalVariables.RESPONSE_CODE_500, transactionRequestRefId,
               "Failed to insert Card Data", "Failed to insert Card data", ""),
               HttpStatus.INTERNAL_SERVER_ERROR);
@@ -104,8 +103,8 @@ public class CardController {
       List<Card> findCardsWithName = cardService.getCardByName(cardName);
       Long noOfCardsByName = findCardsWithName.stream().count();
 
+
       if(!findCardsWithName.isEmpty()){
-        System.out.println(findCardsWithName.toString());
         return new ResponseEntity<>(EntryResponse.responseFormatter(GlobalVariables.RESPONSE_CODE_200, transactionRequestRefId,
                 "Cards by name Found", String.valueOf(noOfCardsByName),findCardsWithName),
                 HttpStatus.OK);
