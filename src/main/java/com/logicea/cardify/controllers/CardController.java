@@ -103,7 +103,7 @@ public class CardController {
     try{
       List<Card> findCardsWithName = cardService.getCardByName(cardName);
       Long noOfCardsByName = findCardsWithName.stream().count();
-      
+
       if(!findCardsWithName.isEmpty()){
         System.out.println(findCardsWithName.toString());
         return new ResponseEntity<>(EntryResponse.responseFormatter(GlobalVariables.RESPONSE_CODE_200, transactionRequestRefId,
